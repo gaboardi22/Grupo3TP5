@@ -10,7 +10,7 @@ import java.util.TreeMap;
 public class Directorio {
     TreeMap<Long, Contacto> directorio;
 
-    public Directorio(TreeMap<Long, Contacto> directorio) {
+    public Directorio() {
         directorio = new TreeMap<>();
     }
 
@@ -29,6 +29,6 @@ public class Directorio {
     
     
     public void agregarContacto(){
-        
+       
     }
 }

@@ -3,7 +3,7 @@ package Entidades;
 
 /**
  *
- * @author NETBOOK G5
+ * @author GRUPO 3
  */
 public class Contacto {
     private int dni;
