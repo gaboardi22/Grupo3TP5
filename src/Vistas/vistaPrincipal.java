@@ -85,8 +85,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jlTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlTelefono.setText("Telefono:");
 
-        jtfTelefono.setText("jTextField1");
-
         jbNuevo.setText("Nuevo");
 
         jbGuardar.setText("Guardar");
