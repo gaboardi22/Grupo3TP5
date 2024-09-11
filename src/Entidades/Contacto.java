@@ -11,15 +11,14 @@ public class Contacto {
     private String nombre;
     private String ciudad;
     private String direccion;
-    private long telefono;
+ 
 
-    public Contacto(int dni, String apellido, String nombre, String ciudad, String direccion, long telefono) {
+    public Contacto(int dni, String apellido, String nombre, String ciudad, String direccion) {
         this.dni = dni;
         this.apellido = apellido;
         this.nombre = nombre;
         this.ciudad = ciudad;
         this.direccion = direccion;
-        this.telefono = telefono;
     }
 
     public int getDni() {
@@ -62,17 +61,10 @@ public class Contacto {
         this.direccion = direccion;
     }
 
-    public long getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(long telefono) {
-        this.telefono = telefono;
-    }
 
     @Override
     public String toString() {
-        return "Contacto{" + "dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", ciudad=" + ciudad + ", direccion=" + direccion + ", telefono=" + telefono + '}';
+        return "Contacto{" + "dni=" + dni + ", apellido=" + apellido + ", nombre=" + nombre + ", ciudad=" + ciudad + ", direccion=" + direccion  + '}';
     }
     
     
