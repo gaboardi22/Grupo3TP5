@@ -11,7 +11,7 @@ public class Contacto {
     private String nombre;
     private String ciudad;
     private String direccion;
- 
+    
 
     public Contacto(int dni, String apellido, String nombre, String ciudad, String direccion) {
         this.dni = dni;
