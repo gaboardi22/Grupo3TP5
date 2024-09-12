@@ -74,13 +74,24 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jlCiudad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlCiudad.setText("Ciudad:");
 
+        jbBuscar.setForeground(new java.awt.Color(0, 102, 255));
+        jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/zoom_zooming_detective_searching_engine_search_icon_256456.png"))); // NOI18N
         jbBuscar.setText("Buscar");
 
         jlTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlTelefono.setText("Telefono:");
 
+        jbNuevo.setForeground(new java.awt.Color(0, 102, 255));
+        jbNuevo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/arrow_rotate_reload_refresh_icon_256470.png"))); // NOI18N
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
+        jbGuardar.setForeground(new java.awt.Color(0, 102, 255));
+        jbGuardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/signs_button_plus_sign_add_icon_256475.png"))); // NOI18N
         jbGuardar.setText("Guardar");
         jbGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,6 +99,8 @@ public class vistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jbBorrar.setForeground(new java.awt.Color(0, 102, 255));
+        jbBorrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/delete_garbage_bin_trash_remove_icon_256469.png"))); // NOI18N
         jbBorrar.setText("Borrar");
         jbBorrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,6 +108,8 @@ public class vistaPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jbSalir.setForeground(new java.awt.Color(0, 102, 255));
+        jbSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/dismiss_circle_cancel_remove_delete_close_icon_256476.png"))); // NOI18N
         jbSalir.setText("Salir");
         jbSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,48 +129,52 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlDNI)
-                            .addComponent(jlNombre)
-                            .addComponent(jlApellido)
-                            .addComponent(jlCiudad)
-                            .addComponent(jlDireccion))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jlEncabezado)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jtfNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                                    .addComponent(jtfApellido)
-                                    .addComponent(jtfCiudad)
-                                    .addComponent(jtfDireccion, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtfDNI, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jbBuscar))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jlTelefono)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE))
+                        .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jbNuevo)
-                        .addGap(31, 31, 31)
-                        .addComponent(jbGuardar)
-                        .addGap(36, 36, 36)
-                        .addComponent(jbBorrar)
-                        .addGap(31, 31, 31)
-                        .addComponent(jbSalir)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlDNI)
+                                    .addComponent(jlNombre)
+                                    .addComponent(jlApellido)
+                                    .addComponent(jlCiudad)
+                                    .addComponent(jlDireccion))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtfNombre)
+                                    .addComponent(jtfApellido)
+                                    .addComponent(jtfCiudad)
+                                    .addComponent(jtfDNI)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBuscar))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jbNuevo)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbBorrar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbSalir)))
+                        .addGap(44, 44, 44)))
                 .addGap(19, 19, 19))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addComponent(jlEncabezado)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(17, 17, 17)
                 .addComponent(jlEncabezado)
-                .addGap(37, 37, 37)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlDNI)
                     .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,7 +207,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addComponent(jbBorrar)
                     .addComponent(jbGuardar)
                     .addComponent(jbNuevo))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTablaContacto.setModel(new javax.swing.table.DefaultTableModel(
@@ -209,10 +228,10 @@ public class vistaPrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 553, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -243,7 +262,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-       Long telefono  = Long.valueOf(jtfTelefono.getText());
+        Long telefono  = Long.valueOf(jtfTelefono.getText());
         directorio.borrarContacto(telefono);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
