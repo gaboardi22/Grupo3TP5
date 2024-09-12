@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 public class vistaPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
     Directorio directorio = new Directorio();
+    DefaultTableModel modelob = new DefaultTableModel();
     public vistaPrincipal() {
         initComponents();
         armarCabecera();
@@ -49,6 +50,10 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jbSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTablaContacto = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLBusqueda = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtBusqueda = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -202,7 +207,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addComponent(jbBorrar)
                     .addComponent(jbGuardar)
                     .addComponent(jbNuevo))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTablaContacto.setModel(new javax.swing.table.DefaultTableModel(
@@ -216,7 +221,29 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTablaContacto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTablaContactoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTablaContacto);
+
+        jLabel1.setText("Todos los contactos");
+
+        jLBusqueda.setText("Busqueda");
+
+        jtBusqueda.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jtBusqueda);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -225,16 +252,26 @@ public class vistaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLBusqueda)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLBusqueda)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -283,6 +320,12 @@ public class vistaPrincipal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbSalirActionPerformed
 
+    private void jTablaContactoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTablaContactoMouseClicked
+        // TODO add your handling code here:
+        int filaSeleccionada = jTablaContacto.getSelectedRow();
+        modelo.removeRow(filaSeleccionada);
+    }//GEN-LAST:event_jTablaContactoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -317,8 +360,11 @@ public class vistaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLBusqueda;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTablaContacto;
     private javax.swing.JButton jbBorrar;
@@ -333,6 +379,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jlEncabezado;
     private javax.swing.JLabel jlNombre;
     private javax.swing.JLabel jlTelefono;
+    private javax.swing.JTable jtBusqueda;
     private javax.swing.JTextField jtfApellido;
     private javax.swing.JTextField jtfCiudad;
     private javax.swing.JTextField jtfDNI;
@@ -341,13 +388,21 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
 private void armarCabecera(){
+    
     modelo.addColumn("DNI");
     modelo.addColumn("Nombre");
     modelo.addColumn("Apellido");
     modelo.addColumn("Direccion");
     modelo.addColumn("Ciudad");
     modelo.addColumn("Telefono");
+    modelob.addColumn("DNI");
+    modelob.addColumn("Nombre");
+    modelob.addColumn("Apellido");
+    modelob.addColumn("Direccion");
+    modelob.addColumn("Ciudad");
+    modelob.addColumn("Telefono");
     jTablaContacto.setModel(modelo);
+    jtBusqueda.setModel(modelob);
 }
 private void cargarDatos(){
     modelo.addRow(new Object[]{jtfDNI.getText(),jtfNombre.getText(),jtfApellido.getText(),jtfDireccion.getText(),jtfCiudad.getText(),jtfTelefono.getText()});
