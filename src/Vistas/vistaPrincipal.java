@@ -92,8 +92,18 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jlTelefono.setText("Telefono:");
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
 
@@ -230,6 +240,19 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNombreActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+       
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        jtfDNI.setText("");
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfDireccion.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText(""); 
+    }//GEN-LAST:event_jbNuevoActionPerformed
 
     /**
      * @param args the command line arguments
