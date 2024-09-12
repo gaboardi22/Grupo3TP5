@@ -1,20 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package Vistas;
+
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Ezequiel
  */
 public class vistaPrincipal extends javax.swing.JFrame {
-
-    /**
-     * Creates new form vistaPrincipal
-     */
+    DefaultTableModel modelo = new DefaultTableModel();
+    
     public vistaPrincipal() {
         initComponents();
+        armarCabecera();
     }
 
     /**
@@ -47,7 +45,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jbBorrar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablaContacto = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -184,7 +182,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaContacto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -195,7 +193,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jTablaContacto);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -264,7 +262,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablaContacto;
     private javax.swing.JButton jbBorrar;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbGuardar;
@@ -284,4 +282,18 @@ public class vistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
+private void armarCabecera(){
+    modelo.addColumn("DNI");
+    modelo.addColumn("Nombre");
+    modelo.addColumn("Apellido");
+    modelo.addColumn("Direccion");
+    modelo.addColumn("Ciudad");
+    modelo.addColumn("Telefono");
+    jTablaContacto.setModel(modelo);
+}
+private void cargarTabla(){
+    modelo.setRowCount(0);
+    
+}
+
 }

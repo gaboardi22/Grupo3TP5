@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author GRUPO 3
  */
 public class Directorio {
-    TreeMap<Long, Contacto> directorio;
+     private static TreeMap<Long, Contacto> directorio;
 
     public Directorio() {
         directorio = new TreeMap<>();
@@ -23,7 +23,7 @@ public class Directorio {
     }
 
     public void setDirectorio(TreeMap<Long, Contacto> directorio) {
-        this.directorio = directorio;
+        Directorio.directorio = directorio;
     }
 
     @Override
