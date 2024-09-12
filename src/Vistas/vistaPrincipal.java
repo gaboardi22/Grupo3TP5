@@ -1,6 +1,9 @@
 
 package Vistas;
 
+import Entidades.Contacto;
+import Entidades.Directorio;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -9,10 +12,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vistaPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
+    Directorio directorio;
     
     public vistaPrincipal() {
         initComponents();
+        directorio = new Directorio(); 
         armarCabecera();
+        cargarTabla();
     }
 
     /**
@@ -291,9 +297,19 @@ private void armarCabecera(){
     modelo.addColumn("Telefono");
     jTablaContacto.setModel(modelo);
 }
-private void cargarTabla(){
-    modelo.setRowCount(0);
-    
-}
-
+ private void cargarTabla() {
+        modelo.setRowCount(0); 
+        for (Map.Entry<Long, Contacto> entry : directorio.getDirectorio().entrySet()) {
+            Contacto contacto = entry.getValue();
+            Object[] fila = {
+                contacto.getDni(),        
+                contacto.getNombre(),
+                contacto.getApellido(),
+                contacto.getDireccion(),
+                contacto.getCiudad(),
+                entry.getKey()           
+            };
+            modelo.addRow(fila);
+        }
+    }
 }
