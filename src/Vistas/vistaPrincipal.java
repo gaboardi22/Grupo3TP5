@@ -162,8 +162,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                                 .addComponent(jbBorrar)
                                 .addGap(18, 18, 18)
                                 .addComponent(jbSalir)))
-                        .addGap(44, 44, 44)))
-                .addGap(19, 19, 19))
+                        .addGap(63, 63, 63))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(124, 124, 124)
                 .addComponent(jlEncabezado)
@@ -174,12 +173,13 @@ public class vistaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jlEncabezado)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlDNI)
-                    .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jlDNI)
+                        .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jbBuscar))
-                .addGap(17, 17, 17)
+                .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlNombre)
                     .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -236,10 +236,10 @@ public class vistaPrincipal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(33, 33, 33)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -266,7 +266,15 @@ public class vistaPrincipal extends javax.swing.JFrame {
         directorio.borrarContacto(telefono);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
+private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {                                        
 
+        jtfDNI.setText("");
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfDireccion.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText("");
+    }                          
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
