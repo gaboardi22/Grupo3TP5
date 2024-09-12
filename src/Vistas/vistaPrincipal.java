@@ -1,6 +1,9 @@
 
 package Vistas;
 
+import Entidades.Contacto;
+import Entidades.Directorio;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -9,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class vistaPrincipal extends javax.swing.JFrame {
     DefaultTableModel modelo = new DefaultTableModel();
-    
+    Directorio directorio = new Directorio();
     public vistaPrincipal() {
         initComponents();
         armarCabecera();
@@ -86,12 +89,32 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jlTelefono.setText("Telefono:");
 
         jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNuevoActionPerformed(evt);
+            }
+        });
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,6 +248,41 @@ public class vistaPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtfNombreActionPerformed
 
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        jtfDNI.setText("");
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfDireccion.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText("");
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        try{
+        Contacto contacto = new Contacto(Integer.parseInt(jtfDNI.getText()),
+                        jtfNombre.getText(),
+                        jtfApellido.getText(),
+                        jtfDireccion.getText(),
+                        jtfCiudad.getText());
+                        cargarDatos();
+        directorio.agregarContacto(Long.parseLong(jtfTelefono.getText()),contacto);}catch(NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error al ingresar los datos");
+        }
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+        // TODO add your handling code here:
+        directorio.borrarContacto(Long.parseLong(jtfTelefono.getText()));
+        JOptionPane.showMessageDialog(this, "Se borro el contacto con el numero: "+jtfTelefono.getText());
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        System.exit(0);
+    }//GEN-LAST:event_jbSalirActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,9 +349,9 @@ private void armarCabecera(){
     modelo.addColumn("Telefono");
     jTablaContacto.setModel(modelo);
 }
-private void cargarTabla(){
-    modelo.setRowCount(0);
-    
+private void cargarDatos(){
+    modelo.addRow(new Object[]{jtfDNI.getText(),jtfNombre.getText(),jtfApellido.getText(),jtfDireccion.getText(),jtfCiudad.getText(),jtfTelefono.getText()});
+    }
 }
 
-}
+
