@@ -74,18 +74,6 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jlCiudad.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlCiudad.setText("Ciudad:");
 
-        jtfDNI.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDNIActionPerformed(evt);
-            }
-        });
-
-        jtfNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNombreActionPerformed(evt);
-            }
-        });
-
         jbBuscar.setText("Buscar");
 
         jlTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -94,10 +82,25 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jbNuevo.setText("Nuevo");
 
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbBorrar.setText("Borrar");
+        jbBorrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBorrarActionPerformed(evt);
+            }
+        });
 
         jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -223,17 +226,28 @@ public class vistaPrincipal extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtfDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDNIActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfDNIActionPerformed
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        int dni = Integer.parseInt(jtfDNI.getText());
+        String apellido = jtfApellido.getText();
+        String nombre = jtfNombre.getText();
+        String ciudad  =jtfCiudad.getText();
+        String domicilio = jtfDireccion.getText();
+        Long telefono  = Long.valueOf(jtfTelefono.getText());
+        Contacto contacto  = new Contacto(dni, apellido, nombre, ciudad, domicilio);
+        directorio.agregarContacto(telefono, contacto);
+        cargarTabla();
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jtfNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNombreActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+      dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
+       Long telefono  = Long.valueOf(jtfTelefono.getText());
+        directorio.borrarContacto(telefono);
+    }//GEN-LAST:event_jbBorrarActionPerformed
+
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
