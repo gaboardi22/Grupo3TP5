@@ -11,15 +11,16 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Ezequiel
+ * @author GRUPO 3
  */
 public class vistaPrincipal extends javax.swing.JFrame {
+
     DefaultTableModel modelo = new DefaultTableModel();
     Directorio directorio;
-    
+
     public vistaPrincipal() {
         initComponents();
-        directorio = new Directorio(); 
+        directorio = new Directorio();
         armarCabecera();
         cargarTabla();
     }
@@ -253,57 +254,71 @@ public class vistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
-        try{
-        int dni = Integer.parseInt(jtfDNI.getText());
-        String apellido = jtfApellido.getText();
-        String nombre = jtfNombre.getText();
-        String ciudad  =jtfCiudad.getText();
-        String domicilio = jtfDireccion.getText();
-        Long telefono  = Long.valueOf(jtfTelefono.getText());
-        int confirmacion = JOptionPane.showConfirmDialog(this, "¿los datos ingresados son correcto?");
-           if (confirmacion == JOptionPane.YES_OPTION) {
-               Contacto contacto  = new Contacto(dni, apellido, nombre, ciudad, domicilio);
-               directorio.agregarContacto(telefono, contacto);
-               cargarTabla();
-           } else {
-               JOptionPane.showMessageDialog(this, "Porfavor vuelva a cargar los datos");
-               limpiarCampos();
-           }
-        }catch(NumberFormatException  ex){
-          JOptionPane.showMessageDialog(this, "El DNI y el telefono debe ser numeros");
-        } 
+        try {
+            int dni = Integer.parseInt(jtfDNI.getText());
+            String apellido = jtfApellido.getText();
+            String nombre = jtfNombre.getText();
+            String ciudad = jtfCiudad.getText();
+            String domicilio = jtfDireccion.getText();
+            Long telefono = Long.valueOf(jtfTelefono.getText());
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿los datos ingresados son correcto?");
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                Contacto contacto = new Contacto(dni, apellido, nombre, ciudad, domicilio);
+                directorio.agregarContacto(telefono, contacto);
+                cargarTabla();
+            } else {
+                JOptionPane.showMessageDialog(this, "Porfavor vuelva a cargar los datos");
+                limpiarCampos();
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "El DNI y el telefono debe ser numeros");
+        }
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-      dispose();
+        dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
     private void jbBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBorrarActionPerformed
-        Long telefono  = Long.valueOf(jtfTelefono.getText());
+        Long telefono = Long.valueOf(jtfTelefono.getText());
         directorio.borrarContacto(telefono);
+        cargarTabla();
     }//GEN-LAST:event_jbBorrarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-       modelo.setRowCount(0);
-        if(!jtfTelefono.getText().equals("")){
-         Contacto contacto =  directorio.buscarContacto(Long.valueOf(jtfTelefono.getText()));
-         Long telefono = Long.valueOf(jtfTelefono.getText());
-         cargarTablaContacto(contacto, telefono);
-       }else if(!jtfApellido.getText().equals("")){
-           String apellido = jtfApellido.getText();
-           Set<Long> telefonos = directorio.buscarTelefono(apellido);
-           for (Long telefono : telefonos) {
+        modelo.setRowCount(0);
+        if (!jtfTelefono.getText().equals("")) {
+            Contacto contacto = directorio.buscarContacto(Long.valueOf(jtfTelefono.getText()));
+            Long telefono = Long.valueOf(jtfTelefono.getText());
+            cargarTablaContacto(contacto, telefono);
+        } else if (!jtfApellido.getText().equals("")) {
+            String apellido = jtfApellido.getText();
+            Set<Long> telefonos = directorio.buscarTelefono(apellido);
+            for (Long telefono : telefonos) {
                 Contacto contacto = directorio.buscarContacto(telefono);
-                    cargarTablaContacto(contacto, telefono);
-           }
-    }else{
-           JOptionPane.showMessageDialog(this, "Error en la busqueda, solo debe elegir un parametro de busqueda");
-       }
+                cargarTablaContacto(contacto, telefono);
+            }
+        } else if (!jtfCiudad.getText().equals("")) {
+            ArrayList<Contacto> contacto = directorio.buscarContactos(jtfCiudad.getText());
+            Long telefono = null;
+            for (Contacto con : contacto) {
+                for (Map.Entry<Long, Contacto> entry : directorio.getDirectorio().entrySet()) {
+                    if (entry.getValue().equals(con)) {
+                        telefono = entry.getKey();
+                        break;
+                    }
+                    cargarTablaContacto(con, telefono);
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Error en la busqueda, solo debe elegir un parametro de busqueda");
+        }
     }//GEN-LAST:event_jbBuscarActionPerformed
- 
-private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {                                        
-       limpiarCampos();
-    }                          
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {
+        limpiarCampos();
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -358,47 +373,49 @@ private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {
     private javax.swing.JTextField jtfNombre;
     private javax.swing.JTextField jtfTelefono;
     // End of variables declaration//GEN-END:variables
-private void armarCabecera(){
-    modelo.addColumn("DNI");
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Apellido");
-    modelo.addColumn("Direccion");
-    modelo.addColumn("Ciudad");
-    modelo.addColumn("Telefono");
-    jTablaContacto.setModel(modelo);
-}
- private void cargarTabla() {
-        modelo.setRowCount(0); 
+private void armarCabecera() {
+        modelo.addColumn("DNI");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Apellido");
+        modelo.addColumn("Direccion");
+        modelo.addColumn("Ciudad");
+        modelo.addColumn("Telefono");
+        jTablaContacto.setModel(modelo);
+    }
+
+    private void cargarTabla() {
+        modelo.setRowCount(0);
         for (Map.Entry<Long, Contacto> entry : directorio.getDirectorio().entrySet()) {
             Contacto contacto = entry.getValue();
             Object[] fila = {
-                contacto.getDni(),        
+                contacto.getDni(),
                 contacto.getNombre(),
                 contacto.getApellido(),
                 contacto.getDireccion(),
                 contacto.getCiudad(),
-                entry.getKey()           
+                entry.getKey()
             };
             modelo.addRow(fila);
         }
     }
- 
- private void limpiarCampos(){
-      jtfDNI.setText("");
+
+    private void limpiarCampos() {
+        jtfDNI.setText("");
         jtfNombre.setText("");
         jtfApellido.setText("");
         jtfDireccion.setText("");
         jtfCiudad.setText("");
         jtfTelefono.setText("");
- }
- private void cargarTablaContacto(Contacto contacto, Long telefono) {
-    modelo.addRow(new Object[]{
-        contacto.getDni(),
-        contacto.getNombre(),
-        contacto.getApellido(),
-        contacto.getCiudad(),
-        contacto.getDireccion(),
-        telefono
-    });
-}
+    }
+
+    private void cargarTablaContacto(Contacto contacto, Long telefono) {
+        modelo.addRow(new Object[]{
+            contacto.getDni(),
+            contacto.getNombre(),
+            contacto.getApellido(),
+            contacto.getCiudad(),
+            contacto.getDireccion(),
+            telefono
+        });
+    }
 }
