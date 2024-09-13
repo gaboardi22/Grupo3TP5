@@ -4,6 +4,7 @@ package Vistas;
 import Entidades.Contacto;
 import Entidades.Directorio;
 import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -144,13 +145,11 @@ public class vistaPrincipal extends javax.swing.JFrame {
                                     .addComponent(jlDireccion))
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jtfNombre)
-                                    .addComponent(jtfApellido)
-                                    .addComponent(jtfCiudad)
                                     .addComponent(jtfDNI)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(jtfDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jtfCiudad)
+                                    .addComponent(jtfNombre)
+                                    .addComponent(jtfDireccion)
+                                    .addComponent(jtfApellido))
                                 .addGap(18, 18, 18)
                                 .addComponent(jbBuscar))
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -173,16 +172,17 @@ public class vistaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jlEncabezado)
-                .addGap(34, 34, 34)
+                .addGap(42, 42, 42)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jlDNI)
-                        .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtfDNI, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jlDNI))
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jlNombre)
+                            .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jbBuscar))
-                .addGap(9, 9, 9)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jlNombre)
-                    .addComponent(jtfNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(16, 16, 16)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jlApellido)
@@ -207,7 +207,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addComponent(jbBorrar)
                     .addComponent(jbGuardar)
                     .addComponent(jbNuevo))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(8, Short.MAX_VALUE))
         );
 
         jTablaContacto.setModel(new javax.swing.table.DefaultTableModel(
@@ -246,15 +246,31 @@ public class vistaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        try{
         int dni = Integer.parseInt(jtfDNI.getText());
         String apellido = jtfApellido.getText();
         String nombre = jtfNombre.getText();
         String ciudad  =jtfCiudad.getText();
         String domicilio = jtfDireccion.getText();
         Long telefono  = Long.valueOf(jtfTelefono.getText());
-        Contacto contacto  = new Contacto(dni, apellido, nombre, ciudad, domicilio);
-        directorio.agregarContacto(telefono, contacto);
-        cargarTabla();
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿los datos ingresados son correcto?");
+           if (confirmacion == JOptionPane.YES_OPTION) {
+               Contacto contacto  = new Contacto(dni, apellido, nombre, ciudad, domicilio);
+               directorio.agregarContacto(telefono, contacto);
+               cargarTabla();
+           } else {
+               JOptionPane.showMessageDialog(this, "Porfavor vuelva a cargar los datos");
+                jtfDNI.setText("");
+                jtfNombre.setText("");
+                jtfApellido.setText("");
+                jtfDireccion.setText("");
+                jtfCiudad.setText("");
+                jtfTelefono.setText("");
+           }
+        }catch(NumberFormatException  ex){
+          JOptionPane.showMessageDialog(this, "El DNI y el telefono debe ser numeros");
+        }
+        
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
