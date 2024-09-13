@@ -3,7 +3,9 @@ package Vistas;
 
 import Entidades.Contacto;
 import Entidades.Directorio;
+import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -78,6 +80,11 @@ public class vistaPrincipal extends javax.swing.JFrame {
         jbBuscar.setForeground(new java.awt.Color(0, 102, 255));
         jbBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/zoom_zooming_detective_searching_engine_search_icon_256456.png"))); // NOI18N
         jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jlTelefono.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jlTelefono.setText("Telefono:");
@@ -132,7 +139,7 @@ public class vistaPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jlTelefono)
                         .addGap(18, 18, 18)
-                        .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -260,17 +267,11 @@ public class vistaPrincipal extends javax.swing.JFrame {
                cargarTabla();
            } else {
                JOptionPane.showMessageDialog(this, "Porfavor vuelva a cargar los datos");
-                jtfDNI.setText("");
-                jtfNombre.setText("");
-                jtfApellido.setText("");
-                jtfDireccion.setText("");
-                jtfCiudad.setText("");
-                jtfTelefono.setText("");
+               limpiarCampos();
            }
         }catch(NumberFormatException  ex){
           JOptionPane.showMessageDialog(this, "El DNI y el telefono debe ser numeros");
-        }
-        
+        } 
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
@@ -282,14 +283,26 @@ public class vistaPrincipal extends javax.swing.JFrame {
         directorio.borrarContacto(telefono);
     }//GEN-LAST:event_jbBorrarActionPerformed
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+       modelo.setRowCount(0);
+        if(!jtfTelefono.getText().equals("")){
+         Contacto contacto =  directorio.buscarContacto(Long.valueOf(jtfTelefono.getText()));
+         Long telefono = Long.valueOf(jtfTelefono.getText());
+         cargarTablaContacto(contacto, telefono);
+       }else if(!jtfApellido.getText().equals("")){
+           String apellido = jtfApellido.getText();
+           Set<Long> telefonos = directorio.buscarTelefono(apellido);
+           for (Long telefono : telefonos) {
+                Contacto contacto = directorio.buscarContacto(telefono);
+                    cargarTablaContacto(contacto, telefono);
+           }
+    }else{
+           JOptionPane.showMessageDialog(this, "Error en la busqueda, solo debe elegir un parametro de busqueda");
+       }
+    }//GEN-LAST:event_jbBuscarActionPerformed
+ 
 private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {                                        
-
-        jtfDNI.setText("");
-        jtfNombre.setText("");
-        jtfApellido.setText("");
-        jtfDireccion.setText("");
-        jtfCiudad.setText("");
-        jtfTelefono.setText("");
+       limpiarCampos();
     }                          
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -369,4 +382,23 @@ private void armarCabecera(){
             modelo.addRow(fila);
         }
     }
+ 
+ private void limpiarCampos(){
+      jtfDNI.setText("");
+        jtfNombre.setText("");
+        jtfApellido.setText("");
+        jtfDireccion.setText("");
+        jtfCiudad.setText("");
+        jtfTelefono.setText("");
+ }
+ private void cargarTablaContacto(Contacto contacto, Long telefono) {
+    modelo.addRow(new Object[]{
+        contacto.getDni(),
+        contacto.getNombre(),
+        contacto.getApellido(),
+        contacto.getCiudad(),
+        contacto.getDireccion(),
+        telefono
+    });
+}
 }
