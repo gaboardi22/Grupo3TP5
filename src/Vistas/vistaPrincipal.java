@@ -298,20 +298,24 @@ public class vistaPrincipal extends javax.swing.JFrame {
                 Contacto contacto = directorio.buscarContacto(telefono);
                 cargarTablaContacto(contacto, telefono);
             }
-        } else if (!jtfCiudad.getText().equals("")) {
+        }else if (!jtfCiudad.getText().equals("")) {
             ArrayList<Contacto> contacto = directorio.buscarContactos(jtfCiudad.getText());
-            Long telefono = null;
+            
             for (Contacto con : contacto) {
+                Long telefono = null;
                 for (Map.Entry<Long, Contacto> entry : directorio.getDirectorio().entrySet()) {
                     if (entry.getValue().equals(con)) {
                         telefono = entry.getKey();
                         break;
                     }
+                  }
+                  if (telefono != null){
                     cargarTablaContacto(con, telefono);
                 }
             }
+
         } else {
-            JOptionPane.showMessageDialog(this, "Error en la busqueda, solo debe elegir un parametro de busqueda");
+            JOptionPane.showMessageDialog(this, "Error en la busqueda, solo debe elegir un parametro de busqueda: apellido, ciudad o telefono");
         }
     }//GEN-LAST:event_jbBuscarActionPerformed
 
@@ -413,8 +417,8 @@ private void armarCabecera() {
             contacto.getDni(),
             contacto.getNombre(),
             contacto.getApellido(),
-            contacto.getCiudad(),
             contacto.getDireccion(),
+            contacto.getCiudad(),
             telefono
         });
     }
